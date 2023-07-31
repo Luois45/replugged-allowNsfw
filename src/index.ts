@@ -1,24 +1,19 @@
-import { Injector, Logger, webpack } from "replugged";
+import { Injector, webpack } from "replugged";
 
-const inject = new Injector();
-const logger = Logger.plugin("allowNsfw");
+const injector = new Injector();
 
 export async function start(): Promise<void> {
-  const getCurrentUserMod = await webpack.waitForModule<{
-    getCurrentUser: () => {
-      nsfwAllowed: boolean;
-    };
-  }>(webpack.filters.byProps("getCurrentUser"));
+  // Find the module containing the getCurrentUser function
+  const v = webpack.getByProps("getCurrentUser").getCurrentUser();
 
-  if (getCurrentUserMod) {
-    inject.after(getCurrentUserMod, "getCurrentUser", (args, ret) => {
-      if (ret) {
-        ret.nsfwAllowed = true;
-      }
-    });
-  }
+  if (typeof v === "undefined") return;
+
+  v.nsfwAllowed = true;
+
+  console.log(v);
 }
 
 export function stop(): void {
-  inject.uninjectAll();
+  // Remove all injections when the plugin is stopped
+  injector.uninjectAll();
 }
