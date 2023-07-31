@@ -3,15 +3,24 @@ import { Injector, webpack } from "replugged";
 const injector = new Injector();
 let intervalId: NodeJS.Timeout | null = null;
 
+export function waitForValue(): Promise<any> {
+  return new Promise((resolve) => {
+    const interval = setInterval(() => {
+      const v = webpack.getByProps("getCurrentUser").getCurrentUser();
+      if (typeof v !== "undefined") {
+        if (v.hasOwnProperty("nsfwAllowed")) {
+          clearInterval(interval);
+          resolve(v);
+        }
+      }
+    }, 1);
+  });
+}
+
 export async function start(): Promise<void> {
-  intervalId = setInterval(() => {
-    const v = webpack.getByProps("getCurrentUser").getCurrentUser();
+  const v = await waitForValue();
 
-    if (typeof v === "undefined") return;
-    if (v.nsfwAllowed == true) return;
-
-    v.nsfwAllowed = true;
-  }, 1000);
+  v.nsfwAllowed = true;
 }
 
 export function stop(): void {

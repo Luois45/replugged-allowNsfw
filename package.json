@@ -1,6 +1,6 @@
 {
   "name": "allowNsfw",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "Allows you to see NSFW channels and messages",
   "engines": {
     "node": ">=18.0.0",
