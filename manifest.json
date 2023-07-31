@@ -9,8 +9,8 @@
   },
   "version": "1.0.2",
   "updater": {
-    "type": "store",
-    "id": "dev.Luois45.allowNsfw"
+    "type": "github",
+    "id": "Luois45/allowNsfw"
   },
   "license": "MIT",
   "source": "https://github.com/Luois45/allowNsfw",
