@@ -8,7 +8,7 @@ export async function start(): Promise<void> {
     const v = webpack.getByProps("getCurrentUser").getCurrentUser();
 
     if (typeof v === "undefined") return;
-    if (v == true) return;
+    if (v.nsfwAllowed == true) return;
 
     v.nsfwAllowed = true;
   }, 1000);
