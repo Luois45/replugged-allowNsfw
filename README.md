@@ -2,7 +2,7 @@
 
 Allows you to see NSFW channels and messages
 
-[![Install in Replugged](https://img.shields.io/badge/-Install%20in%20Replugged-blue?style=for-the-badge&logo=none)](https://replugged.dev/install?identifier=dev.Luois45.allowNsfw)
+[![Install in Replugged](https://img.shields.io/badge/-Install%20in%20Replugged-blue?style=for-the-badge&logo=none)](https://replugged.dev/install?identifier=Luois45/allowNsfw&source=github)
 
 ## Install
 
