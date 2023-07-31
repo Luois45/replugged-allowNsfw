@@ -1,7 +1,7 @@
 {
-  "name": "plugin-template",
+  "name": "allowNsfw",
   "version": "1.0.0",
-  "description": "A plugin template",
+  "description": "Allows you to see NSFW channels and messages",
   "engines": {
     "node": ">=18.0.0",
     "pnpm": ">=8.0.0"

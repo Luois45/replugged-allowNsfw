@@ -1,22 +1,20 @@
 import { Injector, Logger, webpack } from "replugged";
 
 const inject = new Injector();
-const logger = Logger.plugin("PluginTemplate");
+const logger = Logger.plugin("allowNsfw");
 
 export async function start(): Promise<void> {
-  const typingMod = await webpack.waitForModule<{
-    startTyping: (channelId: string) => void;
-  }>(webpack.filters.byProps("startTyping"));
-  const getChannelMod = await webpack.waitForModule<{
-    getChannel: (id: string) => {
-      name: string;
+  const getCurrentUserMod = await webpack.waitForModule<{
+    getCurrentUser: () => {
+      nsfwAllowed: boolean;
     };
-  }>(webpack.filters.byProps("getChannel"));
+  }>(webpack.filters.byProps("getCurrentUser"));
 
-  if (typingMod && getChannelMod) {
-    inject.instead(typingMod, "startTyping", ([channel]) => {
-      const channelObj = getChannelMod.getChannel(channel);
-      logger.log(`Typing prevented! Channel: #${channelObj?.name ?? "unknown"} (${channel}).`);
+  if (getCurrentUserMod) {
+    inject.after(getCurrentUserMod, "getCurrentUser", (args, ret) => {
+      if (ret) {
+        ret.nsfwAllowed = true;
+      }
     });
   }
 }
