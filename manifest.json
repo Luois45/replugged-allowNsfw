@@ -7,7 +7,7 @@
     "discordID": "771355749220876310",
     "github": "Luois45"
   },
-  "version": "1.0.0",
+  "version": "1.0.2",
   "updater": {
     "type": "store",
     "id": "dev.Luois45.allowNsfw"
