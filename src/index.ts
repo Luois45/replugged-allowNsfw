@@ -15,10 +15,8 @@ export async function start(): Promise<void> {
 }
 
 export function stop(): void {
-  // Remove all injections when the plugin is stopped
   injector.uninjectAll();
 
-  // Clear the interval when the plugin is stopped
   if (intervalId !== null) {
     clearInterval(intervalId);
     intervalId = null;
